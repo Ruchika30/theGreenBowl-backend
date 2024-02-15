@@ -1,0 +1,32 @@
+[{
+    "itemName":"",
+    "rating":0,
+    "price":"",
+    "description":"",
+    "veg": true,
+    "image":"",
+    "tag":"",
+    "info": [{
+        "energy":"4000kcal",
+        "protein":"15.6g",
+        "carbs":"616g",
+        "fats":"18g"
+    }],
+    "addons":[{
+        "ingredients":[{
+            "item": "onions",
+            "price": 19
+         },{
+             "item": "corn",
+             "price": 27
+          }],
+
+        "beverages" :[{
+            "item":  "watermelon",
+            "price": 40
+        },{
+            "item":  "banana shake",
+            "price": 40
+        }]
+     }]
+}]

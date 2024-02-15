@@ -1,0 +1,16 @@
+{
+  "name": "thegreenbowl-backend",
+  "version": "1.0.0",
+  "description": "Backend Node Project for Green Bowl",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TheGreenBowl",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^8.1.2"
+  }
+}
