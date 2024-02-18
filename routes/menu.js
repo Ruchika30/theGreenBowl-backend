@@ -53,6 +53,20 @@ router.post('/update',async(req,res)=>{
     })
 });
 
+router.get("/getAll", async (req, res) => {
+	try {
+		
+		let menuItem = await MenuItems.find();
+		if (menuItem) {
+			res.json(menuItem);
+		} else {
+			res.status(204).send();
+		}
+	} catch (err) {
+		res.status(500).send(err);
+	}
+});
+
 
 async function getDocumentCount() {
     let count = await MenuItems.countDocuments();

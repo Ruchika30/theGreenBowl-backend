@@ -30,6 +30,11 @@ const MenuView = MenuItems.aggregate([
         
       },
     },
+    {
+      $match: {
+        isActive: true,
+      }
+    }
   ]);
 
 
