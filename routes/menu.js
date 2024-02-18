@@ -27,9 +27,9 @@ router.post("/add", async (req, res) => {
 			res.status(409).send({ Message: "Menu Items Already Exists" });
 			return;
 		}
-		let menuId = await getDocumentCount();
+		// let menuId = await getDocumentCount();
 		let menuItemsList = new MenuItems({
-			itemName, rating, price, description, veg, image, tag, info,isActive,menuId
+			itemName, rating, price, description, veg, image, tag, info,isActive,
 		});
 		await menuItemsList.save();
 		res.status(200).send({ Message: "Menu Items Added Sucessfully" });
@@ -65,6 +65,19 @@ router.get("/getAll", async (req, res) => {
 	} catch (err) {
 		res.status(500).send(err);
 	}
+});
+
+router.post('/delete',async(req,res)=>{
+    let {id} = req.body;
+    MenuItems.findOneAndDelete({_id: id}).then((docs)=>{
+        if(docs) {
+            res.status(200).send({"Message":"Menu Item Deleted Sucessfully"});
+        } else {
+            res.status(400).send({"Message":"Error Deleting Menu Item"});
+        }
+    }).catch((err)=>{
+        res.status(500).send('server error');
+    })
 });
 
 

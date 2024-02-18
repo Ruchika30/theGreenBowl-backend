@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 const MenuInformationSchema = mongoose.Schema({
 	energy:{
@@ -58,12 +59,12 @@ const MenuItemsSchema = new mongoose.Schema({
 	},
 	menuId:{
 		type:Number,
-		required:true
+		required:false
 	}
 
 });
 
-;
+MenuItemsSchema.plugin(AutoIncrement, { inc_field: 'menuId' });
 
 const MenuItems = mongoose.model("MenuItems", MenuItemsSchema);
 

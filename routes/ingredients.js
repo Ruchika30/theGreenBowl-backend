@@ -45,5 +45,17 @@ router.post('/update',async(req,res)=>{
     })
 });
 
+router.post('/delete',async(req,res)=>{
+    let {id} = req.body;
+    Ingredients.findOneAndDelete({_id: id}).then((docs)=>{
+        if(docs) {
+            res.status(200).send({"Message":"Ingredient Deleted Sucessfully"});
+        } else {
+            res.status(400).send({"Message":"Error Deleting Ingredient"});
+        }
+    }).catch((err)=>{
+        res.status(500).send('server error');
+    })
+});
 
 module.exports = router;
