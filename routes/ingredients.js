@@ -32,4 +32,18 @@ router.post("/add", async (req, res) => {
 	}
 });
 
+router.post('/update',async(req,res)=>{
+    let {id} = req.body;
+    Ingredients.findOneAndUpdate({_id: id},req.body,{new:true}).then((docs)=>{
+        if(docs) {
+            res.status(200).send({"Message":"Ingredient Updated Sucessfully"});
+        } else {
+            res.status(400).send({"Message":"Error Updating Ingredient"});
+        }
+    }).catch((err)=>{
+        res.status(500).send('server error');
+    })
+});
+
+
 module.exports = router;

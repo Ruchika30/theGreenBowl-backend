@@ -12,6 +12,8 @@ const MenuView = MenuItems.aggregate([
     },
     {
       $project: {
+        "id": "$_id",
+        _id: 1,
         "itemName":1,
         "rating":1,
         "price":1,
