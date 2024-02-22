@@ -2,12 +2,25 @@ const express = require("express");
 const router = express.Router();
 const MenuItems = require("../models/MenuItems");
 const views = require("../models/views/MenuViews");
+const NestedViews = require("../models/views/NestedMenuViews");
 
 router.get("/", async (req, res) => {
 	try {
 		
-		let menuItem = await views;
+		let menuItem = await NestedViews;
+
 		if (menuItem) {
+			for (let index = 0; index < menuItem.length; index++) {
+				const element = menuItem[index];
+				if(element.menus.length == 1){
+					if(!Object.hasOwn(element.menus[0], 'itemName')){
+						console.log("Counter 1");
+						element.menus = [];
+					}
+				}
+				
+			}
+			menuItem = menuItem.sort((a, b) => a.categoryId - b.categoryId);
 			res.json(menuItem);
 		} else {
 			res.status(204).send();
@@ -20,7 +33,7 @@ router.get("/", async (req, res) => {
 router.post("/add", async (req, res) => {
 	
 	try {
-		let { itemName, rating, price, description, veg, image, tag, info,isActive } = req.body;
+		let { itemName, rating, price, description, veg, image, tag, info,isActive,categoryType } = req.body;
 		MenuItems.createIndexes({ itemName: 1 }, { unique: true });
 		let checker = await MenuItems.findOne({itemName:itemName})
 		if(checker){
@@ -29,7 +42,7 @@ router.post("/add", async (req, res) => {
 		}
 		// let menuId = await getDocumentCount();
 		let menuItemsList = new MenuItems({
-			itemName, rating, price, description, veg, image, tag, info,isActive,
+			itemName, rating, price, description, veg, image, tag, info,isActive,categoryType
 		});
 		await menuItemsList.save();
 		res.status(200).send({ Message: "Menu Items Added Sucessfully" });

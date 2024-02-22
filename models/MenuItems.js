@@ -66,6 +66,10 @@ const MenuItemsSchema = new mongoose.Schema({
 	menuId:{
 		type:Number,
 		required:false
+	},
+	categoryType:{
+		type:Number,
+		required:true	
 	}
 
 });

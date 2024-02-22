@@ -4,7 +4,19 @@ const Ingredients = require("../models/Ingredient");
 
 router.get("/", async (req, res) => {
 	try {
-		let IngredientsList = await Ingredients.find();
+		const IngredientsList = await Ingredients.aggregate([
+			{
+				$project: {
+					id: "$_id",
+					name: 1,
+					price: 1,
+					menuIds: 1,
+					isActive: 1,
+					_id: 0,
+				},
+			},
+		]);
+		// let IngredientsList = await Ingredients.find();
 		if (IngredientsList) {
 			res.json(IngredientsList);
 		} else {
