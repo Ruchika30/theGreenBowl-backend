@@ -29,10 +29,16 @@ const MenuItemsSchema = new mongoose.Schema({
 		type: Number,
 		required: true,
 	},
-	price: {
-		type: Number,
-		required: true,
-	},
+	price: [{
+		name: {
+			type: String,
+			required: true,
+		},
+		value: {
+			type: Number,
+			required: true,
+		},	
+	}],
 	description: {
 		type: String,
 		required: true,
