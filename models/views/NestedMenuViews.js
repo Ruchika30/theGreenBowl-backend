@@ -46,7 +46,8 @@ const NestedMenuView = CategoryTypes.aggregate([
             isActive: "$menus.isActive",
             menuId: "$menus.menuId",
             categoryType: "$menus.categoryType",
-            ingredients: "$menus.ingredients"     
+            ingredients: "$menus.ingredients",
+            dressing: { $ifNull: ["$menus.dressing" , ""] },    
           },
           else: "$REMOVE"
         }

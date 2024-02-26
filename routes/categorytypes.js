@@ -18,14 +18,14 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-	let { name, description,isActive } = req.body;
+	let { name, description,isActive,categoryValue } = req.body;
 	let checker = await Category.findOne({name:name})
 	if(checker){
 		res.status(409).send({ Message: "Category Already Exists" });
 		return;
 	}
 	let CategoryList = new Category({
-		name, description,isActive
+		name, description,isActive,categoryValue
 	});
 
 	try {

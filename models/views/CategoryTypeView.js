@@ -8,6 +8,7 @@ const CategoryTypesView = CategoryTypes.aggregate([
 			categoryId: 1,
 			description: 1,
 			isActive: 1,
+			categoryValue:{ $ifNull: ["$categoryValue", ""] },
 			_id: 0,
 		},
 	},

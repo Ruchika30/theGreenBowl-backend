@@ -70,7 +70,11 @@ const MenuItemsSchema = new mongoose.Schema({
 	categoryType:{
 		type:Number,
 		required:true	
-	}
+	},
+	dressing:{
+		type:String,
+		required:true
+	},
 
 });
 

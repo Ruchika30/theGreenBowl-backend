@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
 router.post("/add", async (req, res) => {
 	
 	try {
-		let { itemName, rating, price, description, veg, image, tag, info,isActive,categoryType } = req.body;
+		let { itemName, rating, price, description, veg, image, tag, info,isActive,categoryType,dressing } = req.body;
 		MenuItems.createIndexes({ itemName: 1 }, { unique: true });
 		let checker = await MenuItems.findOne({itemName:itemName})
 		if(checker){
@@ -42,7 +42,7 @@ router.post("/add", async (req, res) => {
 		}
 		// let menuId = await getDocumentCount();
 		let menuItemsList = new MenuItems({
-			itemName, rating, price, description, veg, image, tag, info,isActive,categoryType
+			itemName, rating, price, description, veg, image, tag, info,isActive,categoryType,dressing
 		});
 		await menuItemsList.save();
 		res.status(200).send({ Message: "Menu Items Added Sucessfully" });
