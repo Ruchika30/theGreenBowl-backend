@@ -15,7 +15,7 @@ app.use(express.json());
 
 // basic endpoint to check if server is running
 app.get("/", (req, res) => {
-	res.send(`Hey,I am Green Bowl's Backend Server`);
+	res.send(`Hey,I am Green Bowl's Backend Server Here`);
 });
 
 // Application using Cors
