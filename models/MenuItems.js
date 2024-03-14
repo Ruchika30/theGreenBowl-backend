@@ -41,7 +41,7 @@ const MenuItemsSchema = new mongoose.Schema({
 	}],
 	description: {
 		type: String,
-		required: true,
+		required: false,
 	},
 	veg: {
 		type: Boolean,
@@ -73,7 +73,7 @@ const MenuItemsSchema = new mongoose.Schema({
 	},
 	dressing:{
 		type:String,
-		required:true
+		required:false
 	},
 
 });
