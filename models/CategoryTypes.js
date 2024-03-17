@@ -21,7 +21,11 @@ const CategorySchema = new mongoose.Schema({
 	categoryValue:{
 		type:String,
 		required:true,
-	}
+	},
+	categoryOrder:{
+		type:Number,
+		required:false,
+	},
 
 
 });

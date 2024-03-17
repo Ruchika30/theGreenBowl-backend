@@ -31,6 +31,7 @@ const NestedMenuView = CategoryTypes.aggregate([
       description: { $first: "$description" }, // Keep CategoryType fields
       categoryId: { $first: "$categoryId" }, // Keep CategoryType fields
       categoryValue: { $first: "$categoryValue" }, // Keep CategoryType fields
+      categoryOrder: { $first: "$categoryOrder" }, // Keep CategoryType fields
       menus: { $push: {
         $cond: {
           if: "$menus.isActive",
@@ -63,6 +64,7 @@ const NestedMenuView = CategoryTypes.aggregate([
       categoryId: 1,
       isActive: 1,
       categoryValue: 1,
+      categoryOrder: 1,
       menus: {
         $filter: {
           input: "$menus",
@@ -71,7 +73,12 @@ const NestedMenuView = CategoryTypes.aggregate([
         }
       }
     }
-  }
+  },
+  {
+    $sort: {
+      categoryOrder: 1, // 1 for ascending order, -1 for descending order
+    },
+  },
 ]);
 
 module.exports = NestedMenuView;

@@ -8,8 +8,14 @@ const CategoryTypesView = CategoryTypes.aggregate([
 			categoryId: 1,
 			description: 1,
 			isActive: 1,
-			categoryValue:{ $ifNull: ["$categoryValue", ""] },
+			categoryValue: { $ifNull: ["$categoryValue", ""] },
 			_id: 0,
+			categoryOrder: { $ifNull: ["$categoryOrder", null] },
+		},
+	},
+	{
+		$sort: {
+			categoryOrder: 1,
 		},
 	},
 ]);

@@ -18,14 +18,23 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-	let { name, description,isActive,categoryValue } = req.body;
+	let { name, description,isActive,categoryValue,categoryOrder } = req.body;
 	let checker = await Category.findOne({name:name})
 	if(checker){
 		res.status(409).send({ Message: "Category Already Exists" });
 		return;
 	}
+	let categoryOrderChecker = await Category.findOne({categoryOrder:categoryOrder})
+	if(categoryOrderChecker){
+		res.status(409).send({ Message: "Category Order Already Exists" });
+		return;
+	}
+	categoryOrderDefault = await getDocumentCount();
+	if(categoryOrder == null || categoryOrder == 0){
+		categoryOrder = categoryOrderDefault;
+	}
 	let CategoryList = new Category({
-		name, description,isActive,categoryValue
+		name, description,isActive,categoryValue,categoryOrder
 	});
 
 	try {
@@ -39,7 +48,19 @@ router.post("/add", async (req, res) => {
 });
 
 router.post('/update',async(req,res)=>{
-    let {id} = req.body;
+    let {id,categoryOrder} = req.body;
+	let categoryOrderChecker = await Category.findOne({
+		_id: { $ne: id },
+		categoryOrder: categoryOrder
+	  })
+	if(categoryOrderChecker){
+		res.status(409).send({ Message: "Category Order Already Exists" });
+		return;
+	}
+	if(categoryOrder == null || categoryOrder == 0){
+		res.status(409).send({ Message: "Category Order is Required" });
+		return;
+	}
     Category.findOneAndUpdate({_id: id},req.body,{new:true}).then((docs)=>{
         if(docs) {
             res.status(200).send({"Message":"Category Updated Sucessfully"});
@@ -63,5 +84,11 @@ router.post('/delete',async(req,res)=>{
         res.status(500).send('server error');
     })
 });
+
+async function getDocumentCount() {
+    let count = await Category.countDocuments();
+    return count + 1;
+}
+
 
 module.exports = router;

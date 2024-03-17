@@ -20,7 +20,7 @@ router.get("/", async (req, res) => {
 				}
 				
 			}
-			menuItem = menuItem.sort((a, b) => a.categoryId - b.categoryId);
+			// menuItem = menuItem.sort((a, b) => a.categoryOrder - b.categoryOrder);
 			res.json(menuItem);
 		} else {
 			res.status(204).send();
